@@ -1,0 +1,5 @@
+method,setting,transform,select_dim,num_layers,hidden_size,batch_size,lr,weight_decay,propensity_C,k,weight_func,lambda_loss,max_epochs,patience,seed
+IPCW,real_data_feature_sweep,standard; select,50; 100; 200,3,64,128,0.0001,0.0001,,,,,200,15,42
+DeepHit,real_data_feature_sweep,standard; select,50; 100; 200,3,64,128,0.0001,0.0001,,,,,200,15,42
+Standard Margin,real_data_feature_sweep,standard; select,50; 100; 200,3,64,128,0.0001,0.0001,,,,,200,15,42
+CWITE,real_data_feature_sweep,standard; select,50; 100; 200,3,64,128,0.0001,0.0001,,not recovered,not recovered,not recovered,200,15,42

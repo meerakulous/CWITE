@@ -1,0 +1,33 @@
+Group,TTE Range,Model,Median MAE (days),95% CI
+Censored,<30 days,IPCW,431.01,"[323.42, 550.50]"
+Censored,<30 days,"Standard
+Margin",587.87,"[-166.11, 1105.10]"
+Censored,<30 days,Standard,1140.20,"[1055.64, 1222.09]"
+Censored,<30 days,"Proposed - Small Weight, g(x) = x",121.45,"[86.50, 155.60]"
+Censored,<30 days,"Proposed - Small Weight, g(x) = e^x",412.10,"[168.24, 613.91]"
+Censored,<30 days,"Proposed - Large Weight, g(x) = x",114.15,"[81.22, 147.45]"
+Censored,<30 days,"Proposed - Large Weight, g(x) = e^x",469.67,"[213.60, 692.08]"
+Censored,≥30 days,IPCW,-294.61,"[-396.03, -211.81]"
+Censored,≥30 days,"Standard
+Margin",-432.18,"[-1240.49, 79.40]"
+Censored,≥30 days,Standard,190.25,"[141.45, 233.30]"
+Censored,≥30 days,"Proposed - Small Weight, g(x) = x",-693.70,"[-747.59, -635.01]"
+Censored,≥30 days,"Proposed - Small Weight, g(x) = e^x",-255.29,"[-401.17, -166.87]"
+Censored,≥30 days,"Proposed - Large Weight, g(x) = x",-713.66,"[-767.13, -662.34]"
+Censored,≥30 days,"Proposed - Large Weight, g(x) = e^x",-246.54,"[-430.98, -139.65]"
+Uncensored,<30 days,IPCW,253.93,"[160.57, 368.47]"
+Uncensored,<30 days,"Standard
+Margin",352.98,"[-397.96, 1016.57]"
+Uncensored,<30 days,Standard,432.06,"[348.05, 518.47]"
+Uncensored,<30 days,"Proposed - Small Weight, g(x) = x",-30.16,"[-105.18, 73.39]"
+Uncensored,<30 days,"Proposed - Small Weight, g(x) = e^x",454.07,"[270.63, 687.25]"
+Uncensored,<30 days,"Proposed - Large Weight, g(x) = x",-61.14,"[-136.95, 53.11]"
+Uncensored,<30 days,"Proposed - Large Weight, g(x) = e^x",708.41,"[413.98, 855.96]"
+Uncensored,≥30 days,IPCW,-298.91,"[-415.53, -208.30]"
+Uncensored,≥30 days,"Standard
+Margin",-408.73,"[-1277.57, 121.29]"
+Uncensored,≥30 days,Standard,-23.78,"[-101.93, 52.08]"
+Uncensored,≥30 days,"Proposed - Small Weight, g(x) = x",-716.70,"[-806.14, -634.04]"
+Uncensored,≥30 days,"Proposed - Small Weight, g(x) = e^x",-178.32,"[-315.95, -80.36]"
+Uncensored,≥30 days,"Proposed - Large Weight, g(x) = x",-743.87,"[-826.55, -657.82]"
+Uncensored,≥30 days,"Proposed - Large Weight, g(x) = e^x",-135.87,"[-298.91, -39.63]"

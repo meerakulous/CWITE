@@ -1,0 +1,280 @@
+{
+  "archive": "/Users/meerakrishnamoorthy/Desktop/semi_synthetic_2.tar.gz",
+  "kind": "semi_synthetic",
+  "n_files_seen": 77,
+  "selected_hyperparameters": {
+    "cwite": {
+      "rows": [
+        {
+          "batch_size": 128,
+          "hidden_size": 64,
+          "k": 95,
+          "lambda_loss": 0.075,
+          "lr": 0.0005,
+          "num_layers": 1,
+          "propensity_C": 1.0,
+          "setting": "covariate_low_resource",
+          "weight_decay": 1e-06,
+          "weight_func": "linear"
+        },
+        {
+          "batch_size": 128,
+          "hidden_size": 32,
+          "k": 95,
+          "lambda_loss": 0.075,
+          "lr": 0.0005,
+          "num_layers": 1,
+          "propensity_C": 1.0,
+          "setting": "covariate_moderate_resource",
+          "weight_decay": 1e-05,
+          "weight_func": "linear"
+        },
+        {
+          "batch_size": 128,
+          "hidden_size": 16,
+          "k": 95,
+          "lambda_loss": 0.075,
+          "lr": 0.0005,
+          "num_layers": 1,
+          "propensity_C": 1.0,
+          "setting": "covariate_high_resource",
+          "weight_decay": 1e-06,
+          "weight_func": "linear"
+        }
+      ],
+      "source": "semi_synthetic_2/proposed.txt"
+    },
+    "deephit": {
+      "rows": [
+        {
+          "batch_size": 128,
+          "hidden_size": 64,
+          "lr": 0.0005,
+          "num_layers": 1,
+          "setting": "covariate_low_resource",
+          "weight_decay": 1e-05
+        },
+        {
+          "batch_size": 64,
+          "hidden_size": 64,
+          "lr": 0.001,
+          "num_layers": 3,
+          "setting": "covariate_moderate_resource",
+          "weight_decay": 0.0001
+        },
+        {
+          "batch_size": 64,
+          "hidden_size": 64,
+          "lr": 0.001,
+          "num_layers": 1,
+          "setting": "covariate_high_resource",
+          "weight_decay": 1e-05
+        }
+      ],
+      "source": "semi_synthetic_2/deephit.txt"
+    },
+    "ipcw": {
+      "rows": [
+        {
+          "batch_size": 128,
+          "hidden_size": 32,
+          "lr": 0.0005,
+          "num_layers": 1,
+          "propensity_C": 1.0,
+          "setting": "covariate_low_resource",
+          "weight_decay": 0.0001
+        },
+        {
+          "batch_size": 128,
+          "hidden_size": 16,
+          "lr": 0.0005,
+          "num_layers": 3,
+          "propensity_C": 1.0,
+          "setting": "covariate_moderate_resource",
+          "weight_decay": 0.0001
+        },
+        {
+          "batch_size": 128,
+          "hidden_size": 32,
+          "lr": 0.0001,
+          "num_layers": 1,
+          "propensity_C": 1.0,
+          "setting": "covariate_high_resource",
+          "weight_decay": 1e-06
+        }
+      ],
+      "source": "semi_synthetic_2/IPCW.txt"
+    },
+    "oracle": {
+      "rows": [
+        {
+          "batch_size": 64,
+          "hidden_size": 16,
+          "lr": 0.001,
+          "num_layers": 3,
+          "setting": "covariate_low_resource",
+          "weight_decay": 1e-06
+        },
+        {
+          "batch_size": 64,
+          "hidden_size": 32,
+          "lr": 0.0005,
+          "num_layers": 3,
+          "setting": "covariate_moderate_resource",
+          "weight_decay": 0.0001
+        },
+        {
+          "batch_size": 64,
+          "hidden_size": 32,
+          "lr": 0.0005,
+          "num_layers": 3,
+          "setting": "covariate_high_resource",
+          "weight_decay": 1e-06
+        }
+      ],
+      "source": "semi_synthetic_2/oracle.txt"
+    },
+    "powell": {
+      "rows": [
+        {
+          "batch_size": 256,
+          "hidden_size": 16,
+          "lr": 0.0001,
+          "num_layers": 3,
+          "setting": "covariate_low_resource",
+          "weight_decay": 1e-06
+        },
+        {
+          "batch_size": 128,
+          "hidden_size": 16,
+          "lr": 0.0001,
+          "num_layers": 1,
+          "setting": "covariate_moderate_resource",
+          "weight_decay": 1e-05
+        },
+        {
+          "batch_size": 256,
+          "hidden_size": 32,
+          "lr": 0.0001,
+          "num_layers": 3,
+          "setting": "covariate_high_resource",
+          "weight_decay": 1e-06
+        }
+      ],
+      "source": "semi_synthetic_2/powells.txt"
+    },
+    "standard_margin": {
+      "alias_of": "powell",
+      "rows": [
+        {
+          "batch_size": 256,
+          "hidden_size": 16,
+          "lr": 0.0001,
+          "num_layers": 3,
+          "setting": "covariate_low_resource",
+          "weight_decay": 1e-06
+        },
+        {
+          "batch_size": 128,
+          "hidden_size": 16,
+          "lr": 0.0001,
+          "num_layers": 1,
+          "setting": "covariate_moderate_resource",
+          "weight_decay": 1e-05
+        },
+        {
+          "batch_size": 256,
+          "hidden_size": 32,
+          "lr": 0.0001,
+          "num_layers": 3,
+          "setting": "covariate_high_resource",
+          "weight_decay": 1e-06
+        }
+      ],
+      "source": "semi_synthetic_2/powells.txt"
+    }
+  },
+  "source_metadata": {
+    "semi_synthetic_2/IPCW.py": {
+      "argparse_defaults": {
+        "idxmax": -1,
+        "idxmin": 0
+      },
+      "early_stopping_patience": 15,
+      "max_epochs": 500,
+      "optimizer": "Adam"
+    },
+    "semi_synthetic_2/IPCW_hyp.py": {
+      "batch_size_lr_grid": "{ 64: [1e-3, 5e-4], 128: [5e-4, 1e-4], 256: [1e-4], }",
+      "early_stopping_patience": 15,
+      "hidden_size_grid": "[16, 32, 64]",
+      "max_epochs": 500,
+      "num_layers_grid": "[1, 2, 3]",
+      "optimizer": "Adam",
+      "propensity_C_grid": "[1, 1e-2, 1e-4, 1e-6]",
+      "random_grid_trials": 25,
+      "seed": 42,
+      "weight_decay_grid": "[1e-4, 1e-5, 1e-6]"
+    },
+    "semi_synthetic_2/deephit.py": {
+      "argparse_defaults": {
+        "idxmax": -1,
+        "idxmin": 0
+      },
+      "early_stopping_patience": 15,
+      "max_epochs": 500,
+      "optimizer": "Adam"
+    },
+    "semi_synthetic_2/deephit_hyp.py": {
+      "batch_size_lr_grid": "{ 64: [1e-3, 5e-4], 128: [5e-4, 1e-4], 256: [1e-4], }",
+      "early_stopping_patience": 15,
+      "hidden_size_grid": "[16, 32, 64]",
+      "max_epochs": 500,
+      "num_layers_grid": "[1, 2, 3]",
+      "optimizer": "Adam",
+      "random_grid_trials": 25,
+      "seed": 42,
+      "weight_decay_grid": "[1e-4, 1e-5, 1e-6]"
+    },
+    "semi_synthetic_2/oracle.py": {
+      "argparse_defaults": {
+        "idxmax": -1,
+        "idxmin": 0
+      },
+      "early_stopping_patience": 15,
+      "max_epochs": 500,
+      "optimizer": "Adam"
+    },
+    "semi_synthetic_2/oracle_hyp.py": {
+      "batch_size_lr_grid": "{ 64: [1e-3, 5e-4], 128: [5e-4, 1e-4], 256: [1e-4], }",
+      "early_stopping_patience": 15,
+      "hidden_size_grid": "[16, 32, 64]",
+      "max_epochs": 500,
+      "num_layers_grid": "[1, 2, 3]",
+      "optimizer": "Adam",
+      "random_grid_trials": 25,
+      "seed": 42,
+      "weight_decay_grid": "[1e-4, 1e-5, 1e-6]"
+    },
+    "semi_synthetic_2/powells.py": {
+      "argparse_defaults": {
+        "idxmax": -1,
+        "idxmin": 0
+      },
+      "early_stopping_patience": 15,
+      "max_epochs": 500,
+      "optimizer": "Adam"
+    },
+    "semi_synthetic_2/powells_hyp.py": {
+      "batch_size_lr_grid": "{ 64: [1e-3, 5e-4], 128: [5e-4, 1e-4], 256: [1e-4], }",
+      "early_stopping_patience": 15,
+      "hidden_size_grid": "[16, 32, 64]",
+      "max_epochs": 500,
+      "num_layers_grid": "[1, 2, 3]",
+      "optimizer": "Adam",
+      "random_grid_trials": 25,
+      "seed": 42,
+      "weight_decay_grid": "[1e-4, 1e-5, 1e-6]"
+    }
+  }
+}

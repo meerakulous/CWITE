@@ -1,0 +1,10 @@
+joblib
+lifelines
+matplotlib
+numpy
+pandas
+scikit-learn
+scipy
+seaborn
+torch
+tqdm

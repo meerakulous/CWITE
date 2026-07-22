@@ -1,0 +1,21 @@
+\begin{table}[ht]
+\centering
+\scriptsize
+\begin{tabular}{lcccc}
+\toprule
+& \multicolumn{2}{c}{TTE <range days} & \multicolumn{2}{c}{TTE ≥range days} \\
+Model & Censored & Uncensored & Censored & Uncensored \\
+\midrule
+IPCW & 639.88 [[543.41, 760.28]] & 335.28 [[255.08, 472.03]] & 394.82 [[352.42, 456.32]] & 350.54 [[291.99, 423.92]] \\
+Proposed - Exponential, Large Weight & 667.63 [[484.32, 875.48]] & 932.22 [[591.61, 1112.45]] & 378.34 [[308.10, 537.22]] & 309.03 [[257.90, 403.26]] \\
+Proposed - Exponential, Small Weight & 591.72 [[420.28, 795.09]] & 581.16 [[365.49, 884.92]] & 366.77 [[303.75, 509.25]] & 309.03 [[254.19, 384.64]] \\
+Proposed - Linear, Large Weight & 366.31 [[338.85, 395.05]] & 231.41 [[178.82, 323.45]] & 549.90 [[512.34, 589.25]] & 577.31 [[509.13, 651.44]] \\
+Proposed - Linear, Small Weight & 368.52 [[338.49, 399.05]] & 232.73 [[170.93, 318.22]] & 536.77 [[495.44, 574.41]] & 559.52 [[486.90, 636.62]] \\
+Standard & 1328.66 [[1224.20, 1427.31]] & 482.55 [[374.73, 586.45]] & 421.41 [[373.72, 467.26]] & 299.77 [[245.30, 355.72]] \\
+Standard
+Margin & 834.14 [[300.37, 1329.83]] & 608.77 [[205.08, 1266.22]] & 510.35 [[258.48, 1077.61]] & 499.12 [[257.16, 1122.94]] \\
+\bottomrule
+\end{tabular}
+\caption{Median MAE and 95\% CI by model, stratified by TTE range and censoring.}
+\label{tab:mae_combined}
+\end{table}

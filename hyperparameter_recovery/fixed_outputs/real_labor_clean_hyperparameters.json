@@ -1,0 +1,276 @@
+{
+  "archive": "/Users/meerakrishnamoorthy/Desktop/real_labor_clean.tar.gz",
+  "kind": "real",
+  "n_files_seen": 19,
+  "runner_commands": {
+    "cwite_cluster_methods": {
+      "cluster_methods": [
+        "kmeans",
+        "kmeans_pca",
+        "gmm",
+        "spectral"
+      ],
+      "cluster_pca_dim": "20",
+      "config": "RUN_ROOT/cwite/proposed_best_config.json",
+      "data_dir": "DATA_DIR",
+      "gpu": "GPU",
+      "log_every_epochs": "5",
+      "max_epochs": "200",
+      "out_dir": "RUN_ROOT/cwite_cluster_methods",
+      "patience": "15",
+      "raw": "run_and_log cwite_cluster_methods   python proposed_cluster_method_controls.py -gpu GPU --config RUN_ROOT/cwite/proposed_best_config.json --data-dir DATA_DIR --out-dir RUN_ROOT/cwite_cluster_methods --cluster-methods kmeans kmeans_pca gmm spectral --cluster-pca-dim 20 --max-epochs 200 --patience 15 --log-every-epochs 5 "
+    },
+    "cwite_global_no_clusters": {
+      "cluster_control": "global",
+      "config": "RUN_ROOT/cwite/proposed_best_config.json",
+      "data_dir": "DATA_DIR",
+      "gpu": "GPU",
+      "log_every_epochs": "5",
+      "max_epochs": "200",
+      "out_dir": "RUN_ROOT/cwite_global_no_clusters",
+      "patience": "15",
+      "raw": "run_and_log cwite_global_no_clusters   python proposed_random_cluster_control.py -gpu GPU --config RUN_ROOT/cwite/proposed_best_config.json --data-dir DATA_DIR --out-dir RUN_ROOT/cwite_global_no_clusters --cluster-control global --max-epochs 200 --patience 15 --log-every-epochs 5 "
+    },
+    "cwite_k_sensitivity": {
+      "config": "RUN_ROOT/cwite/proposed_best_config.json",
+      "data_dir": "DATA_DIR",
+      "gpu": "GPU",
+      "k_values": [
+        "2",
+        "3",
+        "5",
+        "8",
+        "10",
+        "15",
+        "20",
+        "30",
+        "40"
+      ],
+      "log_every_epochs": "5",
+      "max_epochs": "200",
+      "out_dir": "RUN_ROOT/cwite_k_sensitivity",
+      "patience": "15",
+      "raw": "run_and_log cwite_k_sensitivity   python proposed_k_sensitivity.py -gpu GPU --config RUN_ROOT/cwite/proposed_best_config.json --data-dir DATA_DIR --out-dir RUN_ROOT/cwite_k_sensitivity --k-values 2 3 5 8 10 15 20 30 40 --max-epochs 200 --patience 15 --log-every-epochs 5 "
+    },
+    "cwite_random_clusters": {
+      "cluster_control": "random",
+      "config": "RUN_ROOT/cwite/proposed_best_config.json",
+      "data_dir": "DATA_DIR",
+      "gpu": "GPU",
+      "log_every_epochs": "5",
+      "max_epochs": "200",
+      "out_dir": "RUN_ROOT/cwite_random_clusters",
+      "patience": "15",
+      "random_cluster_seed": "123",
+      "raw": "run_and_log cwite_random_clusters   python proposed_random_cluster_control.py -gpu GPU --config RUN_ROOT/cwite/proposed_best_config.json --data-dir DATA_DIR --out-dir RUN_ROOT/cwite_random_clusters --cluster-control random --random-cluster-seed 123 --max-epochs 200 --patience 15 --log-every-epochs 5 "
+    },
+    "final_report_tables": {
+      "cluster_model": "CWITE k=40=RUN_ROOT/cwite_k_sensitivity/cwite_k40_y_test_pred.joblib",
+      "data_dir": "DATA_DIR",
+      "horizons": [
+        "1",
+        "2",
+        "3",
+        "7"
+      ],
+      "model": "CWITE=RUN_ROOT/cwite/proposed_feature_sweep_best_y_test_pred.joblib",
+      "n_boot": "1000",
+      "no_defaults": true,
+      "out_dir": "RUN_ROOT/report_tables",
+      "raw": "run_and_log final_report_tables   python generate_realdata_report_tables.py --data-dir DATA_DIR --out-dir RUN_ROOT/report_tables --no-defaults --model \"IPCW=RUN_ROOT/ipcw/ipcw_feature_sweep_best_y_test_pred.joblib\" --model \"DeepHit=RUN_ROOT/deephit/deephit_feature_sweep_best_y_test_pred.joblib\" --model \"Powell=RUN_ROOT/powell/powell_feature_sweep_best_y_test_pred.joblib\" --model \"CWITE=RUN_ROOT/cwite/proposed_feature_sweep_best_y_test_pred.joblib\" --cluster-model \"CWITE KMeans=RUN_ROOT/cwite/proposed_feature_sweep_best_y_test_pred.joblib\" --cluster-model \"CWITE Random Clusters=RUN_ROOT/cwite_random_clusters/random_cluster_proposed_y_test_pred.joblib\" --cluster-model \"CWITE Global No Clusters=RUN_ROOT/cwite_global_no_clusters/global_cluster_proposed_y_test_pred.joblib\" --cluster-model \"CWITE KMeans rerun=RUN_ROOT/cwite_cluster_methods/cwite_kmeans_y_test_pred.joblib\" --cluster-model \"CWITE KMeans+PCA=RUN_ROOT/cwite_cluster_methods/cwite_kmeans_pca_y_test_pred.joblib\" --cluster-model \"CWITE GMM=RUN_ROOT/cwite_cluster_methods/cwite_gmm_y_test_pred.joblib\" --cluster-model \"CWITE Spectral=RUN_ROOT/cwite_cluster_methods/cwite_spectral_y_test_pred.joblib\" --cluster-model \"CWITE k=2=RUN_ROOT/cwite_k_sensitivity/cwite_k2_y_test_pred.joblib\" --cluster-model \"CWITE k=3=RUN_ROOT/cwite_k_sensitivity/cwite_k3_y_test_pred.joblib\" --cluster-model \"CWITE k=5=RUN_ROOT/cwite_k_sensitivity/cwite_k5_y_test_pred.joblib\" --cluster-model \"CWITE k=8=RUN_ROOT/cwite_k_sensitivity/cwite_k8_y_test_pred.joblib\" --cluster-model \"CWITE k=10=RUN_ROOT/cwite_k_sensitivity/cwite_k10_y_test_pred.joblib\" --cluster-model \"CWITE k=15=RUN_ROOT/cwite_k_sensitivity/cwite_k15_y_test_pred.joblib\" --cluster-model \"CWITE k=20=RUN_ROOT/cwite_k_sensitivity/cwite_k20_y_test_pred.joblib\" --cluster-model \"CWITE k=30=RUN_ROOT/cwite_k_sensitivity/cwite_k30_y_test_pred.joblib\" --cluster-model \"CWITE k=40=RUN_ROOT/cwite_k_sensitivity/cwite_k40_y_test_pred.joblib\" --n-boot 1000 --horizons 1 2 3 7 "
+    },
+    "propensity_calibration": {
+      "data_dir": "DATA_DIR",
+      "n_boot": "1000",
+      "out_dir": "RUN_ROOT/propensity_ranking_ci",
+      "raw": "run_and_log propensity_calibration   python propensity_ranking_ci.py --data-dir DATA_DIR --out-dir RUN_ROOT/propensity_ranking_ci --n-boot 1000 "
+    },
+    "train_cwite": {
+      "data_dir": "DATA_DIR",
+      "gpu": "GPU",
+      "hidden_size": "64",
+      "k": [
+        "5",
+        "10",
+        "20"
+      ],
+      "lambda_loss": [
+        "0.05",
+        "0.1",
+        "0.25",
+        "0.5",
+        "0.7",
+        "0.8",
+        "0.9",
+        "1.0"
+      ],
+      "log_every_epochs": "5",
+      "max_epochs": "200",
+      "methods": "Proposed",
+      "num_layers": "3",
+      "out_dir": "RUN_ROOT/cwite",
+      "patience": "15",
+      "proposed_loss_scaling": "normalized",
+      "raw": "run_and_log train_cwite   python realdata_overall_sweep.py -gpu GPU --methods Proposed --data-dir DATA_DIR --out-dir RUN_ROOT/cwite --max-epochs 200 --patience 15 --log-every-epochs 5 --transforms standard select --select-dims 50 100 200 --num-layers 3 --hidden-size 64 --k 5 10 20 --weight-func linear --lambda-loss 0.05 0.1 0.25 0.5 0.7 0.8 0.9 1.0 --proposed-loss-scaling normalized ",
+      "select_dims": [
+        "50",
+        "100",
+        "200"
+      ],
+      "transforms": [
+        "standard",
+        "select"
+      ],
+      "weight_func": "linear"
+    },
+    "train_deephit": {
+      "data_dir": "DATA_DIR",
+      "gpu": "GPU",
+      "hidden_size": "64",
+      "log_every_epochs": "5",
+      "max_epochs": "200",
+      "methods": "DeepHit",
+      "num_layers": "3",
+      "out_dir": "RUN_ROOT/deephit",
+      "patience": "15",
+      "raw": "run_and_log train_deephit   python realdata_overall_sweep.py -gpu GPU --methods DeepHit --data-dir DATA_DIR --out-dir RUN_ROOT/deephit --max-epochs 200 --patience 15 --log-every-epochs 5 --transforms standard select --select-dims 50 100 200 --num-layers 3 --hidden-size 64 ",
+      "select_dims": [
+        "50",
+        "100",
+        "200"
+      ],
+      "transforms": [
+        "standard",
+        "select"
+      ]
+    },
+    "train_ipcw": {
+      "data_dir": "DATA_DIR",
+      "gpu": "GPU",
+      "hidden_size": "64",
+      "log_every_epochs": "5",
+      "max_epochs": "200",
+      "methods": "IPCW",
+      "num_layers": "3",
+      "out_dir": "RUN_ROOT/ipcw",
+      "patience": "15",
+      "raw": "run_and_log train_ipcw   python realdata_overall_sweep.py -gpu GPU --methods IPCW --data-dir DATA_DIR --out-dir RUN_ROOT/ipcw --max-epochs 200 --patience 15 --log-every-epochs 5 --transforms standard select --select-dims 50 100 200 --num-layers 3 --hidden-size 64 ",
+      "select_dims": [
+        "50",
+        "100",
+        "200"
+      ],
+      "transforms": [
+        "standard",
+        "select"
+      ]
+    },
+    "train_powell": {
+      "data_dir": "DATA_DIR",
+      "gpu": "GPU",
+      "hidden_size": "64",
+      "log_every_epochs": "5",
+      "max_epochs": "200",
+      "methods": "Powell",
+      "num_layers": "3",
+      "out_dir": "RUN_ROOT/powell",
+      "patience": "15",
+      "raw": "run_and_log train_powell   python realdata_overall_sweep.py -gpu GPU --methods Powell --data-dir DATA_DIR --out-dir RUN_ROOT/powell --max-epochs 200 --patience 15 --log-every-epochs 5 --transforms standard select --select-dims 50 100 200 --num-layers 3 --hidden-size 64 ",
+      "select_dims": [
+        "50",
+        "100",
+        "200"
+      ],
+      "transforms": [
+        "standard",
+        "select"
+      ]
+    }
+  },
+  "selected_configs": {},
+  "source_metadata": {
+    "real_labor_clean/proposed_cluster_method_controls.py": {
+      "argparse_defaults": {
+        "cluster_methods": "[\"kmeans\"",
+        "cluster_pca_dim": 20,
+        "data_dir": "/data4/meerak/real_labor",
+        "high_min": 0.7,
+        "high_penalty": 0.25,
+        "log_every_epochs": 5,
+        "log_file": null,
+        "low_max": 0.1,
+        "max_epochs": 200,
+        "out_dir": "/data4/meerak/proposed_cluster_method_controls",
+        "patience": 15,
+        "prediction_mode": "argmax",
+        "random_cluster_seed": 123,
+        "selection_score": "overall"
+      }
+    },
+    "real_labor_clean/proposed_k_sensitivity.py": {
+      "argparse_defaults": {
+        "data_dir": "/data4/meerak/real_labor",
+        "high_min": 0.7,
+        "high_penalty": 0.25,
+        "k_values": "[2",
+        "log_every_epochs": 5,
+        "log_file": null,
+        "low_max": 0.1,
+        "max_epochs": 200,
+        "out_dir": "/data4/meerak/cwite_realdata_final/cwite_k_sensitivity",
+        "patience": 15,
+        "prediction_mode": "argmax",
+        "selection_score": "overall"
+      }
+    },
+    "real_labor_clean/proposed_random_cluster_control.py": {
+      "argparse_defaults": {
+        "cluster_control": "random",
+        "data_dir": "/data4/meerak/real_labor",
+        "high_min": 0.7,
+        "high_penalty": 0.25,
+        "log_every_epochs": 5,
+        "log_file": null,
+        "low_max": 0.1,
+        "max_epochs": null,
+        "out_dir": "/data4/meerak/proposed_random_cluster_control",
+        "patience": null,
+        "prediction_mode": "argmax",
+        "random_cluster_seed": 123,
+        "selection_score": "overall"
+      }
+    },
+    "real_labor_clean/realdata_overall_sweep.py": {
+      "argparse_defaults": {
+        "batch_size": 128,
+        "data_dir": "/data4/meerak/real_labor",
+        "hidden_size": 32,
+        "high_min": 0.7,
+        "high_penalty": 0.25,
+        "k": "[10",
+        "lambda_loss": "[0.05",
+        "log_every_epochs": 5,
+        "log_file": null,
+        "low_max": 0.1,
+        "lr": 0.0001,
+        "max_configs": null,
+        "max_epochs": 300,
+        "methods": "METHODS",
+        "num_layers": 2,
+        "out_dir": "/data4/meerak/cwite_realdata_final",
+        "patience": 20,
+        "pca_dims": "[10",
+        "prediction_mode": "argmax",
+        "proposed_loss_scaling": "normalized",
+        "seed": 42,
+        "select_dims": "[50",
+        "selection_score": "overall",
+        "transforms": "[\"standard\"",
+        "wd": 0.0001,
+        "weight_func": "[\"linear\""
+      },
+      "optimizer": "Adam"
+    }
+  },
+  "sweep_results": {}
+}

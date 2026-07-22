@@ -1,0 +1,1 @@
+method,setting,transform,select_dim,num_layers,hidden_size,batch_size,lr,weight_decay,propensity_C,k,weight_func,lambda_loss,max_epochs,patience,seed
