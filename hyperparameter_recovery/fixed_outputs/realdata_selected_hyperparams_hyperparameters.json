@@ -1,5 +1,5 @@
 {
-  "archive": "/Users/meerakrishnamoorthy/Desktop/realdata_selected_hyperparams.tar.gz",
+  "archive": "<archive-directory>/realdata_selected_hyperparams.tar.gz",
   "kind": "real",
   "n_files_seen": 5,
   "runner_commands": {},

@@ -6,6 +6,7 @@ import torch
 import torch.utils.data as data_utils
 import numpy as np
 import os
+from cwite_paths import data_path, output_path, output_dir
 import torch
 import torch.nn as nn
 torch.backends.cudnn.enabled=False
@@ -123,19 +124,19 @@ f = open('proposed_samecluster_hyp_%d_%d.txt'%(idx_min, idx_max), 'w')
 for COUNT in range(idx_min, idx_max):
     suffix = 'COUNT%d'%(COUNT)
 
-    X_test = joblib.load('/data4/meerak/onevar_data/X_test_%s.joblib'%suffix).reshape(-1, 1)
-    y_test = joblib.load('/data4/meerak/onevar_data/y_test_%s.joblib'%suffix)
-    binary_y_test = joblib.load('/data4/meerak/onevar_data/actual_binary_y_test%s.joblib'%suffix)
+    X_test = joblib.load(data_path('onevar_data', 'X_test_%s.joblib')%suffix).reshape(-1, 1)
+    y_test = joblib.load(data_path('onevar_data', 'y_test_%s.joblib')%suffix)
+    binary_y_test = joblib.load(data_path('onevar_data', 'actual_binary_y_test%s.joblib')%suffix)
 
-    X_train = joblib.load('/data4/meerak/onevar_data/X_train_%s.joblib'%suffix).reshape(-1, 1)
-    y_train = joblib.load('/data4/meerak/onevar_data/y_train_%s.joblib'%suffix)
-    orig_y_train = joblib.load('/data4/meerak/onevar_data/orig_y_train_%s.joblib'%suffix)
-    binary_y_train = joblib.load('/data4/meerak/onevar_data/binary_y_train_%s.joblib'%suffix)
+    X_train = joblib.load(data_path('onevar_data', 'X_train_%s.joblib')%suffix).reshape(-1, 1)
+    y_train = joblib.load(data_path('onevar_data', 'y_train_%s.joblib')%suffix)
+    orig_y_train = joblib.load(data_path('onevar_data', 'orig_y_train_%s.joblib')%suffix)
+    binary_y_train = joblib.load(data_path('onevar_data', 'binary_y_train_%s.joblib')%suffix)
 
-    X_val = joblib.load('/data4/meerak/onevar_data/X_val_%s.joblib'%suffix).reshape(-1, 1)
-    y_val = joblib.load('/data4/meerak/onevar_data/y_val_%s.joblib'%suffix)
-    orig_y_val = joblib.load('/data4/meerak/onevar_data/orig_y_val_%s.joblib'%suffix)
-    binary_y_val = joblib.load('/data4/meerak/onevar_data/binary_y_val_%s.joblib'%suffix)
+    X_val = joblib.load(data_path('onevar_data', 'X_val_%s.joblib')%suffix).reshape(-1, 1)
+    y_val = joblib.load(data_path('onevar_data', 'y_val_%s.joblib')%suffix)
+    orig_y_val = joblib.load(data_path('onevar_data', 'orig_y_val_%s.joblib')%suffix)
+    binary_y_val = joblib.load(data_path('onevar_data', 'binary_y_val_%s.joblib')%suffix)
 
     val_roc_scores = []
     for currC in [1, 1e-2, 1e-4, 1e-6]:
@@ -279,7 +280,7 @@ for COUNT in range(idx_min, idx_max):
             output, loss = prop(data, label, uci, propensity, cluster_weight, f_lambda_loss)
             curr_val_losses.append(loss.detach().cpu().numpy())
         val_losses.append(np.mean(curr_val_losses))
-        torch.save(prop, '/data4/meerak/onevar_models/proposed_samecluster_epoch%d'%(epoch))
+        torch.save(prop, output_path('onevar_models', 'proposed_samecluster_epoch%d')%(epoch))
 
 
         if val_losses[-1] > min(val_losses):
@@ -292,7 +293,7 @@ for COUNT in range(idx_min, idx_max):
 
     best_epoch = np.argmin(val_losses)
     prop = IPCW(X_train.shape[1], max(y_train), f_num_layers, f_hidden_size).to(device)
-    prop = torch.load('/data4/meerak/onevar_models/proposed_samecluster_epoch%d'%(best_epoch))
+    prop = torch.load(output_path('onevar_models', 'proposed_samecluster_epoch%d')%(best_epoch))
 
 
     test_preds = []
@@ -304,5 +305,5 @@ for COUNT in range(idx_min, idx_max):
         test_preds.extend(output.detach().cpu().numpy().reshape(-1))
 
     test_preds = np.array(test_preds)
-    joblib.dump(test_preds, '/data4/meerak/onevar_test_preds/proposed_samecluster_y_test_pred_%s.joblib'%(suffix))
+    joblib.dump(test_preds, output_path('onevar_test_preds', 'proposed_samecluster_y_test_pred_%s.joblib')%(suffix))
     print(suffix, '%0.2f'%np.mean(np.abs(test_preds[binary_y_test == 0] - y_test[binary_y_test == 0])))

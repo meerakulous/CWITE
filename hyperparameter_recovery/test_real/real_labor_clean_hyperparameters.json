@@ -1,5 +1,5 @@
 {
-  "archive": "/Users/meerakrishnamoorthy/Desktop/real_labor_clean.tar.gz",
+  "archive": "<archive-directory>/real_labor_clean.tar.gz",
   "kind": "real",
   "n_files_seen": 19,
   "runner_commands": {

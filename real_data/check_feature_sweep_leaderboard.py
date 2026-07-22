@@ -3,13 +3,14 @@ import csv
 import json
 import re
 from pathlib import Path
+from cwite_paths import real_data_dir, real_run_path, real_output_path
 
 
 DEFAULT_DIRS = [
-    "IPCW=/data4/meerak/cwite_realdata_final/ipcw",
-    "DeepHit=/data4/meerak/cwite_realdata_final/deephit",
-    "Powell=/data4/meerak/cwite_realdata_final/powell",
-    "CWITE=/data4/meerak/cwite_realdata_final/cwite",
+    f"IPCW={real_run_path('ipcw')}",
+    f"DeepHit={real_run_path('deephit')}",
+    f"Powell={real_run_path('powell')}",
+    f"CWITE={real_run_path('cwite')}",
 ]
 
 

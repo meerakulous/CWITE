@@ -1,6 +1,6 @@
 # Hyperparameter Recovery: semi_synthetic
 
-Archive: `/Users/meerakrishnamoorthy/Desktop/semi_synthetic_2.tar.gz`
+Archive: `<archive-directory>/semi_synthetic_2.tar.gz`
 
 ## Paper Table Rows
 

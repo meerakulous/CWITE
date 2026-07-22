@@ -5,9 +5,10 @@ from sklearn.mixture import GaussianMixture
 from sklearn.decomposition import PCA
 from sklearn.metrics import silhouette_score
 import os
+from cwite_paths import data_path, output_path, output_dir
 
 def save_clusters(name, categories_val):
-    out_path = f'/data4/meerak/clustering_results/{name}.joblib'
+    out_path = output_path('clustering_results', f'{name}.joblib')
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     joblib.dump(categories_val, out_path)
 
@@ -24,13 +25,13 @@ def save_variances(name, categories_val, y_val, orig_y_val, binary_y_val):
             'var_y_val': float(var_y),
             'var_orig_y_val': float(var_orig_y)
         }
-    out_path = f'/data4/meerak/clustering_results/{name}_variances.joblib'
+    out_path = output_path('clustering_results', f'{name}_variances.joblib')
     joblib.dump(result, out_path)
 
 suffix = 'covariate_low_resource'
 for folder in ['support50_propbin']:
     try:
-        path = f'/data4/meerak/{folder}'
+        path = data_path(folder)
         X_train = joblib.load(f'{path}_data/X_train_{suffix}.joblib')
         X_val = joblib.load(f'{path}_data/X_val_{suffix}.joblib')
 

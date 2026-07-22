@@ -5,8 +5,8 @@ set -euo pipefail
 # Override these when launching if needed:
 #   DATA_DIR=/path/to/data RUN_ROOT=/path/to/output GPU=0 bash run_all_realdata_series.sh
 
-DATA_DIR="${DATA_DIR:-/data4/meerak/real_labor}"
-RUN_ROOT="${RUN_ROOT:-/data4/meerak/cwite_realdata_final}"
+DATA_DIR="${DATA_DIR:-${CWITE_REAL_DATA_DIR:-../data/real_labor}}"
+RUN_ROOT="${RUN_ROOT:-${CWITE_REAL_RUN_ROOT:-../outputs/real_data}}"
 GPU="${GPU:-0}"
 PYTHON="${PYTHON:-python}"
 

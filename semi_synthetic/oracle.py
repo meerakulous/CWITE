@@ -6,6 +6,7 @@ import torch
 import torch.utils.data as data_utils
 import numpy as np
 import os
+from cwite_paths import data_path, output_path, output_dir
 import torch
 import torch.nn as nn
 torch.backends.cudnn.enabled=False
@@ -156,14 +157,14 @@ print(params)
 suffixcount = -1
 for suffix in params:
     suffixcount += 1
-    X_test = joblib.load('/data4/meerak/support50_propbin_data/X_test_%s.joblib'%suffix)
-    y_test = joblib.load('/data4/meerak/support50_propbin_data/orig_y_test_%s.joblib'%suffix)
+    X_test = joblib.load(data_path('support50_propbin_data', 'X_test_%s.joblib')%suffix)
+    y_test = joblib.load(data_path('support50_propbin_data', 'orig_y_test_%s.joblib')%suffix)
 
-    X_train = joblib.load('/data4/meerak/support50_propbin_data/X_train_%s.joblib'%suffix)
-    y_train = joblib.load('/data4/meerak/support50_propbin_data/orig_y_train_%s.joblib'%suffix)
+    X_train = joblib.load(data_path('support50_propbin_data', 'X_train_%s.joblib')%suffix)
+    y_train = joblib.load(data_path('support50_propbin_data', 'orig_y_train_%s.joblib')%suffix)
 
-    X_val = joblib.load('/data4/meerak/support50_propbin_data/X_val_%s.joblib'%suffix)
-    y_val = joblib.load('/data4/meerak/support50_propbin_data/orig_y_val_%s.joblib'%suffix)
+    X_val = joblib.load(data_path('support50_propbin_data', 'X_val_%s.joblib')%suffix)
+    y_val = joblib.load(data_path('support50_propbin_data', 'orig_y_val_%s.joblib')%suffix)
     
     X_combined = np.concatenate([X_train, X_val], axis=0)
     y_combined = np.concatenate([y_train, y_val], axis=0)
@@ -221,7 +222,7 @@ for suffix in params:
                 output, loss = model(data, label)
                 curr_val_losses.append(loss.detach().cpu().numpy())
             val_losses.append(np.mean(curr_val_losses))
-            torch.save(model, '/data4/meerak/support50_propbin_models/oracle_epoch%d_idxmin%d'%(epoch, idxmin))
+            torch.save(model, output_path('support50_propbin_models', 'oracle_epoch%d_idxmin%d')%(epoch, idxmin))
 
 
             if val_losses[-1] > min(val_losses):
@@ -233,7 +234,7 @@ for suffix in params:
                 
         best_epoch = np.argmin(val_losses)
         model = DeepHit(X_train_new.shape[1], max(y_train_new), f_num_layers, f_hidden_size).to(device)
-        model = torch.load('/data4/meerak/support50_propbin_models/oracle_epoch%d_idxmin%d'%(best_epoch, idxmin))
+        model = torch.load(output_path('support50_propbin_models', 'oracle_epoch%d_idxmin%d')%(best_epoch, idxmin))
 
         test_preds = []
 
@@ -244,8 +245,8 @@ for suffix in params:
             test_preds.extend(output.detach().cpu().numpy().reshape(-1))
 
         test_preds = np.array(test_preds)
-        joblib.dump(test_preds, '/data4/meerak/support50_propbin_test_preds/oracle_y_test_pred_split%d_%s.joblib'%(splitidx, suffix))
+        joblib.dump(test_preds, output_path('support50_propbin_test_preds', 'oracle_y_test_pred_split%d_%s.joblib')%(splitidx, suffix))
         print(suffix, '%0.2f'%np.mean(np.abs(test_preds - y_test)))
 
-        folder_path = "/data4/meerak/support50_propbin_models"
+        folder_path = output_dir('support50_propbin_models')
         os.system(f"rm -f {folder_path}/*oracle*idxmin{idxmin}*")

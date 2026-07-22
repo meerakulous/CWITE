@@ -6,6 +6,7 @@ import torch
 import torch.utils.data as data_utils
 import numpy as np
 import os
+from cwite_paths import data_path, output_path, output_dir
 import torch
 import torch.nn as nn
 torch.backends.cudnn.enabled=False
@@ -146,14 +147,14 @@ f = open('oracle.txt', 'w')
 
 print(params)
 for suffix in params:
-    X_test = joblib.load('/data4/meerak/support50_propbin_data/X_test_%s.joblib'%suffix)
-    y_test = joblib.load('/data4/meerak/support50_propbin_data/orig_y_test_%s.joblib'%suffix)
+    X_test = joblib.load(data_path('support50_propbin_data', 'X_test_%s.joblib')%suffix)
+    y_test = joblib.load(data_path('support50_propbin_data', 'orig_y_test_%s.joblib')%suffix)
 
-    X_train = joblib.load('/data4/meerak/support50_propbin_data/X_train_%s.joblib'%suffix)
-    y_train = joblib.load('/data4/meerak/support50_propbin_data/orig_y_train_%s.joblib'%suffix)
+    X_train = joblib.load(data_path('support50_propbin_data', 'X_train_%s.joblib')%suffix)
+    y_train = joblib.load(data_path('support50_propbin_data', 'orig_y_train_%s.joblib')%suffix)
 
-    X_val = joblib.load('/data4/meerak/support50_propbin_data/X_val_%s.joblib'%suffix)
-    y_val = joblib.load('/data4/meerak/support50_propbin_data/orig_y_val_%s.joblib'%suffix)
+    X_val = joblib.load(data_path('support50_propbin_data', 'X_val_%s.joblib')%suffix)
+    y_val = joblib.load(data_path('support50_propbin_data', 'orig_y_val_%s.joblib')%suffix)
     
     X_combined = np.concatenate([X_train, X_val], axis=0)
     y_combined = np.concatenate([y_train, y_val], axis=0)

@@ -1,6 +1,7 @@
 import argparse
 import csv
 from pathlib import Path
+from cwite_paths import real_data_dir, real_run_path, real_output_path
 
 import joblib
 import numpy as np
@@ -10,10 +11,10 @@ from scipy.stats import chisquare
 
 
 DEFAULT_MODELS = [
-    ("IPCW", "/data4/meerak/cwite_realdata_final/ipcw/ipcw_feature_sweep_best_y_test_dist.joblib"),
-    ("DeepHit", "/data4/meerak/cwite_realdata_final/deephit/deephit_feature_sweep_best_y_test_dist.joblib"),
-    ("Powell", "/data4/meerak/cwite_realdata_final/powell/powell_feature_sweep_best_y_test_dist.joblib"),
-    ("CWITE", "/data4/meerak/cwite_realdata_final/cwite/proposed_feature_sweep_best_y_test_dist.joblib"),
+    ("IPCW", real_run_path('ipcw/ipcw_feature_sweep_best_y_test_dist.joblib')),
+    ("DeepHit", real_run_path('deephit/deephit_feature_sweep_best_y_test_dist.joblib')),
+    ("Powell", real_run_path('powell/powell_feature_sweep_best_y_test_dist.joblib')),
+    ("CWITE", real_run_path('cwite/proposed_feature_sweep_best_y_test_dist.joblib')),
 ]
 
 
@@ -173,8 +174,8 @@ def main():
             "For uncensored individuals, predicted CDF values at observed TTE should be uniform."
         )
     )
-    parser.add_argument("--data-dir", default="/data4/meerak/real_labor")
-    parser.add_argument("--out-dir", default="/data4/meerak/cwite_realdata_final/d_calibration")
+    parser.add_argument("--data-dir", default=real_data_dir())
+    parser.add_argument("--out-dir", default=real_run_path('d_calibration'))
     parser.add_argument("--model", action="append", default=[], help="Model as Name=/path/to/dist.joblib")
     parser.add_argument("--n-bins", type=int, default=10)
     parser.add_argument("--low-max", type=float, default=0.10)

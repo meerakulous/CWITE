@@ -9,6 +9,7 @@ import sys
 import time
 import traceback
 from pathlib import Path
+from cwite_paths import real_data_dir, real_run_path, real_output_path
 
 import joblib
 import numpy as np
@@ -613,8 +614,8 @@ def build_configs(args):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-gpu", type=int, default=0)
-    parser.add_argument("--data-dir", default="/data4/meerak/real_labor")
-    parser.add_argument("--out-dir", default="/data4/meerak/cwite_realdata_final")
+    parser.add_argument("--data-dir", default=real_data_dir())
+    parser.add_argument("--out-dir", default=real_run_path())
     parser.add_argument("--methods", nargs="+", default=METHODS, choices=METHODS)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--max-epochs", type=int, default=300)

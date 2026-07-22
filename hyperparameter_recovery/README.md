@@ -20,22 +20,22 @@ Each script writes three files:
 ## Commands
 
 ```bash
-cd /Users/meerakrishnamoorthy/Documents/Codex/2026-07-11/help-me-update-full-paper-template
+cd <repo-root>
 
 python3 outputs/hyperparameter_recovery/recover_synthetic_hyperparameters.py \
-  /Users/meerakrishnamoorthy/Desktop/synthetic_labor2.targ.z \
+  <archive-directory>/synthetic_labor2.targ.z \
   --out-dir outputs/hyperparameter_recovery/synthetic
 
 python3 outputs/hyperparameter_recovery/recover_semisynthetic_hyperparameters.py \
-  /Users/meerakrishnamoorthy/Desktop/semi_synthetic_2.tar.gz \
+  <archive-directory>/semi_synthetic_2.tar.gz \
   --out-dir outputs/hyperparameter_recovery/semi_synthetic
 
 python3 outputs/hyperparameter_recovery/recover_real_hyperparameters.py \
-  /Users/meerakrishnamoorthy/Desktop/real_labor_clean.tar.gz \
+  <archive-directory>/real_labor_clean.tar.gz \
   --out-dir outputs/hyperparameter_recovery/real
 
 python3 outputs/hyperparameter_recovery/recover_real_hyperparameters.py \
-  /Users/meerakrishnamoorthy/Desktop/realdata_selected_hyperparams.tar.gz \
+  <archive-directory>/realdata_selected_hyperparams.tar.gz \
   --out-dir outputs/hyperparameter_recovery/real_selected
 ```
 

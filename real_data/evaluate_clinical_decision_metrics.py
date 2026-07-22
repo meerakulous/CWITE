@@ -1,6 +1,7 @@
 import argparse
 import csv
 from pathlib import Path
+from cwite_paths import real_data_dir, real_run_path, real_output_path
 
 import joblib
 import numpy as np
@@ -208,8 +209,8 @@ def main():
             "overprediction and wait-horizon decision summaries among uncensored test individuals."
         )
     )
-    parser.add_argument("--data-dir", default="/data4/meerak/real_labor")
-    parser.add_argument("--out-dir", default="/data4/meerak/clinical_decision_metrics")
+    parser.add_argument("--data-dir", default=real_data_dir())
+    parser.add_argument("--out-dir", default=real_output_path('clinical_decision_metrics'))
     parser.add_argument("--model", action="append", default=[], help="Model as Name=prediction_path")
     parser.add_argument("--horizons", type=int, nargs="+", default=[1, 2, 3, 7])
     parser.add_argument("--low-max", type=float, default=0.10)

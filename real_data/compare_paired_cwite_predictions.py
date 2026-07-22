@@ -1,5 +1,6 @@
 import argparse
 from pathlib import Path
+from cwite_paths import real_data_dir, real_run_path, real_output_path
 
 import joblib
 import numpy as np
@@ -49,15 +50,15 @@ def main():
             "Reports MAE(comparison) - MAE(reference), so positive values mean comparison is worse."
         )
     )
-    parser.add_argument("--data-dir", default="/data4/meerak/real_labor")
+    parser.add_argument("--data-dir", default=real_data_dir())
     parser.add_argument(
         "--reference",
-        default="/data4/meerak/cwite_realdata_final/cwite/proposed_feature_sweep_best_y_test_pred.joblib",
+        default=real_run_path('cwite/proposed_feature_sweep_best_y_test_pred.joblib'),
         help="Reference prediction file, usually CWITE k-means.",
     )
     parser.add_argument(
         "--comparison",
-        default="/data4/meerak/cwite_realdata_final/cwite_random_clusters/random_cluster_proposed_y_test_pred.joblib",
+        default=real_run_path('cwite_random_clusters/random_cluster_proposed_y_test_pred.joblib'),
         help="Comparison prediction file, usually CWITE random clusters.",
     )
     parser.add_argument("--reference-name", default="CWITE KMeans")

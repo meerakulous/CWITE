@@ -1,6 +1,6 @@
 # Hyperparameter Recovery: real
 
-Archive: `/Users/meerakrishnamoorthy/Desktop/realdata_selected_hyperparams.tar.gz`
+Archive: `<archive-directory>/realdata_selected_hyperparams.tar.gz`
 
 ## Paper Table Rows
 

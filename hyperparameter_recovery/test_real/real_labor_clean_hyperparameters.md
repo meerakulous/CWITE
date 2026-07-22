@@ -1,6 +1,6 @@
 # Hyperparameter Recovery: real
 
-Archive: `/Users/meerakrishnamoorthy/Desktop/real_labor_clean.tar.gz`
+Archive: `<archive-directory>/real_labor_clean.tar.gz`
 
 ## Paper Table Rows
 

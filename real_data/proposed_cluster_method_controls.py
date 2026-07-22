@@ -4,6 +4,7 @@ import json
 import os
 import time
 from pathlib import Path
+from cwite_paths import real_data_dir, real_run_path, real_output_path
 from types import SimpleNamespace
 
 import joblib
@@ -114,8 +115,8 @@ def main():
         description="Retrain a selected CWITE config once per clustering method for real-data sensitivity analysis."
     )
     parser.add_argument("--config", required=True, help="Path to proposed_best_config.json from the selected CWITE run.")
-    parser.add_argument("--data-dir", default="/data4/meerak/real_labor")
-    parser.add_argument("--out-dir", default="/data4/meerak/proposed_cluster_method_controls")
+    parser.add_argument("--data-dir", default=real_data_dir())
+    parser.add_argument("--out-dir", default=real_output_path('proposed_cluster_method_controls'))
     parser.add_argument("-gpu", type=int, default=0)
     parser.add_argument(
         "--cluster-methods",

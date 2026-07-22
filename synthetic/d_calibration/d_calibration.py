@@ -1,5 +1,6 @@
 import argparse
 from pathlib import Path
+from cwite_paths import data_path, output_path
 
 import joblib
 import numpy as np
@@ -131,7 +132,7 @@ def pmf_exists(path_template, model, count):
 
 def main():
     parser = argparse.ArgumentParser(description="Compute D-calibration on existing synthetic survival data.")
-    parser.add_argument("--data-dir", default="/data4/meerak/onevar_data")
+    parser.add_argument("--data-dir", default=data_path("onevar_data"))
     parser.add_argument("--count", type=int, default=None)
     parser.add_argument("--idxmin", type=int, default=None)
     parser.add_argument("--idxmax", type=int, default=None)
@@ -141,7 +142,7 @@ def main():
     parser.add_argument("--pmf-path", default=None, help="Optional joblib/npy array with shape (n_test, num_times).")
     parser.add_argument(
         "--pmf-template",
-        default="/data4/meerak/onevar_test_pmfs/{model}_y_test_pmf_{suffix}.joblib",
+        default=output_path("onevar_test_pmfs", "{model}_y_test_pmf_{suffix}.joblib"),
         help="Template for method PMF files. Available fields: {model}, {count}, {suffix}.",
     )
     parser.add_argument(

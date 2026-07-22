@@ -1,6 +1,7 @@
 import argparse
 import csv
 from pathlib import Path
+from cwite_paths import real_data_dir, real_run_path, real_output_path
 
 import joblib
 import numpy as np
@@ -85,8 +86,8 @@ def fmt_pct(x):
 
 def main():
     parser = argparse.ArgumentParser(description="Propensity-model AUROC, calibration, and ranking CIs.")
-    parser.add_argument("--data-dir", default="/data4/meerak/real_labor")
-    parser.add_argument("--out-dir", default="/data4/meerak/propensity_ranking_ci")
+    parser.add_argument("--data-dir", default=real_data_dir())
+    parser.add_argument("--out-dir", default=real_output_path('propensity_ranking_ci'))
     parser.add_argument("--n-boot", type=int, default=1000)
     parser.add_argument("--seed", type=int, default=42)
     args = parser.parse_args()

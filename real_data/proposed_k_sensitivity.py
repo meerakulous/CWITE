@@ -4,6 +4,7 @@ import json
 import os
 import time
 from pathlib import Path
+from cwite_paths import real_data_dir, real_run_path, real_output_path
 from types import SimpleNamespace
 
 import joblib
@@ -20,8 +21,8 @@ def main():
         )
     )
     parser.add_argument("--config", required=True, help="Path to selected cwite/proposed_best_config.json.")
-    parser.add_argument("--data-dir", default="/data4/meerak/real_labor")
-    parser.add_argument("--out-dir", default="/data4/meerak/cwite_realdata_final/cwite_k_sensitivity")
+    parser.add_argument("--data-dir", default=real_data_dir())
+    parser.add_argument("--out-dir", default=real_run_path('cwite_k_sensitivity'))
     parser.add_argument("-gpu", type=int, default=0)
     parser.add_argument("--k-values", type=int, nargs="+", default=[2, 3, 5, 8, 10, 15, 20, 30, 40])
     parser.add_argument("--max-epochs", type=int, default=200)

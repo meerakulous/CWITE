@@ -12,17 +12,17 @@ for COUNT in range(1000):
     suffix = f'COUNT{COUNT}'
 
     # Load data
-    X_train = joblib.load(f'/data4/meerak/onevar_data/X_train_{suffix}.joblib').reshape(-1, 1)
-    y_train = joblib.load(f'/data4/meerak/onevar_data/y_train_{suffix}.joblib')
+    X_train = joblib.load(fdata_path('onevar_data', 'X_train_{suffix}.joblib')).reshape(-1, 1)
+    y_train = joblib.load(fdata_path('onevar_data', 'y_train_{suffix}.joblib'))
 
-    X_val = joblib.load(f'/data4/meerak/onevar_data/X_val_{suffix}.joblib').reshape(-1, 1)
-    orig_y_val = joblib.load(f'/data4/meerak/onevar_data/orig_y_val_{suffix}.joblib')
-    y_val = joblib.load(f'/data4/meerak/onevar_data/y_val_{suffix}.joblib')
-    binary_y_val = joblib.load(f'/data4/meerak/onevar_data/binary_y_val_{suffix}.joblib')
+    X_val = joblib.load(fdata_path('onevar_data', 'X_val_{suffix}.joblib')).reshape(-1, 1)
+    orig_y_val = joblib.load(fdata_path('onevar_data', 'orig_y_val_{suffix}.joblib'))
+    y_val = joblib.load(fdata_path('onevar_data', 'y_val_{suffix}.joblib'))
+    binary_y_val = joblib.load(fdata_path('onevar_data', 'binary_y_val_{suffix}.joblib'))
     
-    X_test = joblib.load(f'/data4/meerak/onevar_data/X_test_{suffix}.joblib').reshape(-1, 1)
-    y_test = joblib.load(f'/data4/meerak/onevar_data/y_test_{suffix}.joblib')
-    binary_y_test = joblib.load(f'/data4/meerak/onevar_data/actual_binary_y_test{suffix}.joblib')
+    X_test = joblib.load(fdata_path('onevar_data', 'X_test_{suffix}.joblib')).reshape(-1, 1)
+    y_test = joblib.load(fdata_path('onevar_data', 'y_test_{suffix}.joblib'))
+    binary_y_test = joblib.load(fdata_path('onevar_data', 'actual_binary_y_test{suffix}.joblib'))
 
     # --- Step 1: Use elbow method to find best k on training ---
     k_values = range(2, 50)

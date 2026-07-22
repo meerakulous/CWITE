@@ -13,11 +13,37 @@ This repository contains code accompanying the MLHC 2026 paper on CWITE for time
 
 The synthetic experiments can be regenerated from the included code. The semi-synthetic experiments use SUPPORT-derived data preparation artifacts included with the experiment code where available. The real-data experiments use protected clinical data that cannot be redistributed; those scripts are included to document the analysis pipeline and should be run in an approved environment with the required derived input files.
 
-## Notes For Running
+## Running The Code
 
-Many scripts were originally run on the authors' compute environment and still contain absolute paths such as `/data4/meerak/...`. Before rerunning the experiments in a new environment, update those paths or mount the expected directories.
+Install the Python dependencies listed in `requirements.txt`, then point the scripts at local data and output directories:
 
-The main Python dependencies are listed in `requirements.txt`. Exact package versions may depend on the target compute environment.
+```bash
+export CWITE_DATA_ROOT=/path/to/cwite-data
+export CWITE_OUTPUT_ROOT=/path/to/cwite-outputs
+```
+
+The synthetic and semi-synthetic scripts read from `CWITE_DATA_ROOT` and write models/predictions under `CWITE_OUTPUT_ROOT`. The expected subdirectories are:
+
+```text
+$CWITE_DATA_ROOT/onevar_data
+$CWITE_DATA_ROOT/viol4_onevar_data
+$CWITE_DATA_ROOT/support50_propbin_data
+$CWITE_OUTPUT_ROOT/onevar_models
+$CWITE_OUTPUT_ROOT/onevar_test_preds
+$CWITE_OUTPUT_ROOT/support50_propbin_models
+$CWITE_OUTPUT_ROOT/support50_propbin_test_preds
+```
+
+For real-data analyses, use the real-data-specific variables:
+
+```bash
+export CWITE_REAL_DATA_DIR=/path/to/approved/real_labor_joblibs
+export CWITE_REAL_RUN_ROOT=/path/to/real_data_outputs
+cd real_data
+bash run_all_realdata_series.sh
+```
+
+The protected clinical data used in the real-data experiments cannot be redistributed, so the real-data scripts require approved local derived joblib files. All formerly local machine paths have been replaced by these environment variables or command-line arguments.
 
 ## Hyperparameters
 

@@ -1,6 +1,6 @@
 # Hyperparameter Recovery: real
 
-Archive: `/Users/meerakrishnamoorthy/Desktop/real_labor_clean.tar.gz`
+Archive: `<archive-directory>/real_labor_clean.tar.gz`
 
 ## Paper Table Rows
 
@@ -14,16 +14,16 @@ Archive: `/Users/meerakrishnamoorthy/Desktop/real_labor_clean.tar.gz`
 ## Recovered Search Metadata
 
 ### `real_labor_clean/proposed_cluster_method_controls.py`
-- `argparse_defaults`: `{'data_dir': '/data4/meerak/real_labor', 'out_dir': '/data4/meerak/proposed_cluster_method_controls', 'cluster_methods': '["kmeans"', 'cluster_pca_dim': 20, 'random_cluster_seed': 123, 'max_epochs': 200, 'patience': 15, 'log_every_epochs': 5, 'low_max': 0.1, 'high_min': 0.7, 'high_penalty': 0.25, 'prediction_mode': 'argmax', 'selection_score': 'overall', 'log_file': None}`
+- `argparse_defaults`: `{'data_dir': '$CWITE_DATA_ROOT/real_labor', 'out_dir': '$CWITE_DATA_ROOT/proposed_cluster_method_controls', 'cluster_methods': '["kmeans"', 'cluster_pca_dim': 20, 'random_cluster_seed': 123, 'max_epochs': 200, 'patience': 15, 'log_every_epochs': 5, 'low_max': 0.1, 'high_min': 0.7, 'high_penalty': 0.25, 'prediction_mode': 'argmax', 'selection_score': 'overall', 'log_file': None}`
 
 ### `real_labor_clean/proposed_k_sensitivity.py`
-- `argparse_defaults`: `{'data_dir': '/data4/meerak/real_labor', 'out_dir': '/data4/meerak/cwite_realdata_final/cwite_k_sensitivity', 'k_values': '[2', 'max_epochs': 200, 'patience': 15, 'log_every_epochs': 5, 'low_max': 0.1, 'high_min': 0.7, 'high_penalty': 0.25, 'prediction_mode': 'argmax', 'selection_score': 'overall', 'log_file': None}`
+- `argparse_defaults`: `{'data_dir': '$CWITE_DATA_ROOT/real_labor', 'out_dir': '$CWITE_DATA_ROOT/cwite_realdata_final/cwite_k_sensitivity', 'k_values': '[2', 'max_epochs': 200, 'patience': 15, 'log_every_epochs': 5, 'low_max': 0.1, 'high_min': 0.7, 'high_penalty': 0.25, 'prediction_mode': 'argmax', 'selection_score': 'overall', 'log_file': None}`
 
 ### `real_labor_clean/proposed_random_cluster_control.py`
-- `argparse_defaults`: `{'data_dir': '/data4/meerak/real_labor', 'out_dir': '/data4/meerak/proposed_random_cluster_control', 'cluster_control': 'random', 'random_cluster_seed': 123, 'max_epochs': None, 'patience': None, 'log_every_epochs': 5, 'low_max': 0.1, 'high_min': 0.7, 'high_penalty': 0.25, 'prediction_mode': 'argmax', 'selection_score': 'overall', 'log_file': None}`
+- `argparse_defaults`: `{'data_dir': '$CWITE_DATA_ROOT/real_labor', 'out_dir': '$CWITE_DATA_ROOT/proposed_random_cluster_control', 'cluster_control': 'random', 'random_cluster_seed': 123, 'max_epochs': None, 'patience': None, 'log_every_epochs': 5, 'low_max': 0.1, 'high_min': 0.7, 'high_penalty': 0.25, 'prediction_mode': 'argmax', 'selection_score': 'overall', 'log_file': None}`
 
 ### `real_labor_clean/realdata_overall_sweep.py`
-- `argparse_defaults`: `{'data_dir': '/data4/meerak/real_labor', 'out_dir': '/data4/meerak/cwite_realdata_final', 'methods': 'METHODS', 'seed': 42, 'max_epochs': 300, 'patience': 20, 'low_max': 0.1, 'high_min': 0.7, 'high_penalty': 0.25, 'k': '[10', 'weight_func': '["linear"', 'lambda_loss': '[0.05', 'transforms': '["standard"', 'pca_dims': '[10', 'select_dims': '[50', 'num_layers': 2, 'hidden_size': 32, 'batch_size': 128, 'lr': 0.0001, 'wd': 0.0001, 'prediction_mode': 'argmax', 'proposed_loss_scaling': 'normalized', 'selection_score': 'overall', 'log_every_epochs': 5, 'log_file': None, 'max_configs': None}`
+- `argparse_defaults`: `{'data_dir': '$CWITE_DATA_ROOT/real_labor', 'out_dir': '$CWITE_DATA_ROOT/cwite_realdata_final', 'methods': 'METHODS', 'seed': 42, 'max_epochs': 300, 'patience': 20, 'low_max': 0.1, 'high_min': 0.7, 'high_penalty': 0.25, 'k': '[10', 'weight_func': '["linear"', 'lambda_loss': '[0.05', 'transforms': '["standard"', 'pca_dims': '[10', 'select_dims': '[50', 'num_layers': 2, 'hidden_size': 32, 'batch_size': 128, 'lr': 0.0001, 'wd': 0.0001, 'prediction_mode': 'argmax', 'proposed_loss_scaling': 'normalized', 'selection_score': 'overall', 'log_every_epochs': 5, 'log_file': None, 'max_configs': None}`
 - `optimizer`: `Adam`
 
 ## Real-Data Runner Commands

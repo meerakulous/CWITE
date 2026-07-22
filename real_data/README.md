@@ -35,6 +35,15 @@ not needed for the collaborator-facing run.
 
 ## Expected data layout
 
+Set the real-data input and output roots before running:
+
+```bash
+export CWITE_REAL_DATA_DIR=/path/to/approved/real_labor_joblibs
+export CWITE_REAL_RUN_ROOT=/path/to/real_data_outputs
+```
+
+All scripts also accept explicit `--data-dir` and `--out-dir` arguments, which override these defaults.
+
 The scripts expect joblib files named:
 
 ```text
@@ -49,10 +58,10 @@ real_labor_y_test.joblib
 real_labor_binary_y_test.joblib
 ```
 
-Default server data directory:
+Default data directory:
 
 ```bash
-/data4/meerak/real_labor
+$CWITE_REAL_DATA_DIR
 ```
 
 ## 1. One-command serial run
@@ -63,17 +72,17 @@ folder with clean names and never emits stale legacy CWITE rows.
 Default output root:
 
 ```bash
-/data4/meerak/cwite_realdata_final
+$CWITE_REAL_RUN_ROOT
 ```
 
 Run:
 
 ```bash
 source ~/venv/bin/activate
-cd /data/home/meerak/real_labor_updated/real_data_cleaned_up_experiments
+cd <repo-root>/real_data
 
-DATA_DIR=/data4/meerak/real_labor \
-RUN_ROOT=/data4/meerak/cwite_realdata_final \
+DATA_DIR=$CWITE_REAL_DATA_DIR \
+RUN_ROOT=$CWITE_REAL_RUN_ROOT \
 GPU=0 \
 bash run_all_realdata_series.sh
 ```
@@ -94,19 +103,19 @@ The runner executes, in order:
 Final outputs:
 
 ```text
-/data4/meerak/cwite_realdata_final/report_tables/all_report_tables.tex
-/data4/meerak/cwite_realdata_final/propensity_ranking_ci/propensity_bin_ranking_table.tex
-/data4/meerak/cwite_realdata_final/logs/
+$CWITE_REAL_RUN_ROOT/report_tables/all_report_tables.tex
+$CWITE_REAL_RUN_ROOT/propensity_ranking_ci/propensity_bin_ranking_table.tex
+$CWITE_REAL_RUN_ROOT/logs/
 ```
 
 Clean prediction/config paths:
 
 ```text
-/data4/meerak/cwite_realdata_final/ipcw/ipcw_feature_sweep_best_y_test_pred.joblib
-/data4/meerak/cwite_realdata_final/deephit/deephit_feature_sweep_best_y_test_pred.joblib
-/data4/meerak/cwite_realdata_final/powell/powell_feature_sweep_best_y_test_pred.joblib
-/data4/meerak/cwite_realdata_final/cwite/proposed_feature_sweep_best_y_test_pred.joblib
-/data4/meerak/cwite_realdata_final/cwite/proposed_best_config.json
+$CWITE_REAL_RUN_ROOT/ipcw/ipcw_feature_sweep_best_y_test_pred.joblib
+$CWITE_REAL_RUN_ROOT/deephit/deephit_feature_sweep_best_y_test_pred.joblib
+$CWITE_REAL_RUN_ROOT/powell/powell_feature_sweep_best_y_test_pred.joblib
+$CWITE_REAL_RUN_ROOT/cwite/proposed_feature_sweep_best_y_test_pred.joblib
+$CWITE_REAL_RUN_ROOT/cwite/proposed_best_config.json
 ```
 
 ## 2. Optional: train the four main methods in parallel
@@ -118,13 +127,13 @@ Use separate `screen` sessions so each method has its own GPU and output folder.
 ```bash
 screen -S realdata_ipcw
 source ~/venv/bin/activate
-cd /data/home/meerak/real_labor_updated
+cd <repo-root>
 
 python realdata_overall_sweep.py \
   -gpu 0 \
   --methods IPCW \
-  --data-dir /data4/meerak/real_labor \
-  --out-dir /data4/meerak/cwite_realdata_final/ipcw \
+  --data-dir $CWITE_REAL_DATA_DIR \
+  --out-dir $CWITE_REAL_RUN_ROOT/ipcw \
   --max-epochs 200 \
   --patience 15 \
   --log-every-epochs 5 \
@@ -141,13 +150,13 @@ Detach with `Ctrl-a d`.
 ```bash
 screen -S realdata_deephit
 source ~/venv/bin/activate
-cd /data/home/meerak/real_labor_updated
+cd <repo-root>
 
 python realdata_overall_sweep.py \
   -gpu 1 \
   --methods DeepHit \
-  --data-dir /data4/meerak/real_labor \
-  --out-dir /data4/meerak/cwite_realdata_final/deephit \
+  --data-dir $CWITE_REAL_DATA_DIR \
+  --out-dir $CWITE_REAL_RUN_ROOT/deephit \
   --max-epochs 200 \
   --patience 15 \
   --log-every-epochs 5 \
@@ -162,13 +171,13 @@ python realdata_overall_sweep.py \
 ```bash
 screen -S realdata_powell
 source ~/venv/bin/activate
-cd /data/home/meerak/real_labor_updated
+cd <repo-root>
 
 python realdata_overall_sweep.py \
   -gpu 2 \
   --methods Powell \
-  --data-dir /data4/meerak/real_labor \
-  --out-dir /data4/meerak/cwite_realdata_final/powell \
+  --data-dir $CWITE_REAL_DATA_DIR \
+  --out-dir $CWITE_REAL_RUN_ROOT/powell \
   --max-epochs 200 \
   --patience 15 \
   --log-every-epochs 5 \
@@ -183,13 +192,13 @@ python realdata_overall_sweep.py \
 ```bash
 screen -S realdata_cwite
 source ~/venv/bin/activate
-cd /data/home/meerak/real_labor_updated
+cd <repo-root>
 
 python realdata_overall_sweep.py \
   -gpu 4 \
   --methods Proposed \
-  --data-dir /data4/meerak/real_labor \
-  --out-dir /data4/meerak/cwite_realdata_final/cwite \
+  --data-dir $CWITE_REAL_DATA_DIR \
+  --out-dir $CWITE_REAL_RUN_ROOT/cwite \
   --max-epochs 200 \
   --patience 15 \
   --log-every-epochs 5 \
@@ -207,19 +216,19 @@ python realdata_overall_sweep.py \
 
 ```bash
 python check_feature_sweep_leaderboard.py \
-  "IPCW overall=/data4/meerak/cwite_realdata_final/ipcw" \
-  "DeepHit overall=/data4/meerak/cwite_realdata_final/deephit" \
-  "Powell overall=/data4/meerak/cwite_realdata_final/powell" \
-  "CWITE overall=/data4/meerak/cwite_realdata_final/cwite"
+  "IPCW overall=$CWITE_REAL_RUN_ROOT/ipcw" \
+  "DeepHit overall=$CWITE_REAL_RUN_ROOT/deephit" \
+  "Powell overall=$CWITE_REAL_RUN_ROOT/powell" \
+  "CWITE overall=$CWITE_REAL_RUN_ROOT/cwite"
 ```
 
 The main saved prediction files are:
 
 ```text
-/data4/meerak/cwite_realdata_final/ipcw/ipcw_feature_sweep_best_y_test_pred.joblib
-/data4/meerak/cwite_realdata_final/deephit/deephit_feature_sweep_best_y_test_pred.joblib
-/data4/meerak/cwite_realdata_final/powell/powell_feature_sweep_best_y_test_pred.joblib
-/data4/meerak/cwite_realdata_final/cwite/proposed_feature_sweep_best_y_test_pred.joblib
+$CWITE_REAL_RUN_ROOT/ipcw/ipcw_feature_sweep_best_y_test_pred.joblib
+$CWITE_REAL_RUN_ROOT/deephit/deephit_feature_sweep_best_y_test_pred.joblib
+$CWITE_REAL_RUN_ROOT/powell/powell_feature_sweep_best_y_test_pred.joblib
+$CWITE_REAL_RUN_ROOT/cwite/proposed_feature_sweep_best_y_test_pred.joblib
 ```
 
 Best configs are saved beside the prediction files as `*_best_config.json`.
@@ -230,8 +239,8 @@ This command uses the default output paths listed above.
 
 ```bash
 python generate_realdata_report_tables.py \
-  --data-dir /data4/meerak/real_labor \
-  --out-dir /data4/meerak/final_realdata_report_tables \
+  --data-dir $CWITE_REAL_DATA_DIR \
+  --out-dir $CWITE_REAL_RUN_ROOT/final_realdata_report_tables \
   --n-boot 1000 \
   --horizons 1 2 3 7
 ```
@@ -239,10 +248,10 @@ python generate_realdata_report_tables.py \
 Outputs:
 
 ```text
-/data4/meerak/final_realdata_report_tables/main_extreme_bin_tables.tex
-/data4/meerak/final_realdata_report_tables/clinical_overprediction_tables.tex
-/data4/meerak/final_realdata_report_tables/cluster_sensitivity_tables.tex
-/data4/meerak/final_realdata_report_tables/all_report_tables.tex
+$CWITE_REAL_RUN_ROOT/final_realdata_report_tables/main_extreme_bin_tables.tex
+$CWITE_REAL_RUN_ROOT/final_realdata_report_tables/clinical_overprediction_tables.tex
+$CWITE_REAL_RUN_ROOT/final_realdata_report_tables/cluster_sensitivity_tables.tex
+$CWITE_REAL_RUN_ROOT/final_realdata_report_tables/all_report_tables.tex
 ```
 
 If cluster-sensitivity files are not available yet, pass explicit `--model` arguments or
@@ -254,17 +263,17 @@ Run:
 
 ```bash
 python propensity_ranking_ci.py \
-  --data-dir /data4/meerak/real_labor \
-  --out-dir /data4/meerak/propensity_ranking_ci \
+  --data-dir $CWITE_REAL_DATA_DIR \
+  --out-dir $CWITE_REAL_RUN_ROOT/propensity_ranking_ci \
   --n-boot 1000
 ```
 
 Outputs:
 
 ```text
-/data4/meerak/propensity_ranking_ci/propensity_summary_ci.csv
-/data4/meerak/propensity_ranking_ci/propensity_bin_ranking_ci.csv
-/data4/meerak/propensity_ranking_ci/propensity_bin_ranking_table.tex
+$CWITE_REAL_RUN_ROOT/propensity_ranking_ci/propensity_summary_ci.csv
+$CWITE_REAL_RUN_ROOT/propensity_ranking_ci/propensity_bin_ranking_ci.csv
+$CWITE_REAL_RUN_ROOT/propensity_ranking_ci/propensity_bin_ranking_table.tex
 ```
 
 This reports:
@@ -280,12 +289,12 @@ Use this when you only need the overprediction rate table.
 
 ```bash
 python evaluate_clinical_decision_metrics.py \
-  --data-dir /data4/meerak/real_labor \
-  --out-dir /data4/meerak/cwite_realdata_final/clinical_decision_metrics \
-  --model "IPCW=/data4/meerak/cwite_realdata_final/ipcw/ipcw_feature_sweep_best_y_test_pred.joblib" \
-  --model "DeepHit=/data4/meerak/cwite_realdata_final/deephit/deephit_feature_sweep_best_y_test_pred.joblib" \
-  --model "Powell=/data4/meerak/cwite_realdata_final/powell/powell_feature_sweep_best_y_test_pred.joblib" \
-  --model "CWITE=/data4/meerak/cwite_realdata_final/cwite/proposed_feature_sweep_best_y_test_pred.joblib" \
+  --data-dir $CWITE_REAL_DATA_DIR \
+  --out-dir $CWITE_REAL_RUN_ROOT/clinical_decision_metrics \
+  --model "IPCW=$CWITE_REAL_RUN_ROOT/ipcw/ipcw_feature_sweep_best_y_test_pred.joblib" \
+  --model "DeepHit=$CWITE_REAL_RUN_ROOT/deephit/deephit_feature_sweep_best_y_test_pred.joblib" \
+  --model "Powell=$CWITE_REAL_RUN_ROOT/powell/powell_feature_sweep_best_y_test_pred.joblib" \
+  --model "CWITE=$CWITE_REAL_RUN_ROOT/cwite/proposed_feature_sweep_best_y_test_pred.joblib" \
   --horizons 1 2 3 7 \
   --n-boot 1000
 ```
@@ -302,7 +311,7 @@ Key clinical metrics:
 These scripts start from the selected CWITE config:
 
 ```text
-/data4/meerak/cwite_realdata_final/cwite/proposed_best_config.json
+$CWITE_REAL_RUN_ROOT/cwite/proposed_best_config.json
 ```
 
 They do not tune CWITE again. They hold the selected architecture, feature representation,
@@ -316,9 +325,9 @@ Random clusters:
 ```bash
 python proposed_random_cluster_control.py \
   -gpu 5 \
-  --config /data4/meerak/cwite_realdata_final/cwite/proposed_best_config.json \
-  --data-dir /data4/meerak/real_labor \
-  --out-dir /data4/meerak/cwite_realdata_final/cwite_random_clusters \
+  --config $CWITE_REAL_RUN_ROOT/cwite/proposed_best_config.json \
+  --data-dir $CWITE_REAL_DATA_DIR \
+  --out-dir $CWITE_REAL_RUN_ROOT/cwite_random_clusters \
   --cluster-control random \
   --random-cluster-seed 123 \
   --max-epochs 200 \
@@ -331,9 +340,9 @@ No-clustering/global-reference control:
 ```bash
 python proposed_random_cluster_control.py \
   -gpu 5 \
-  --config /data4/meerak/cwite_realdata_final/cwite/proposed_best_config.json \
-  --data-dir /data4/meerak/real_labor \
-  --out-dir /data4/meerak/cwite_realdata_final/cwite_global_no_clusters \
+  --config $CWITE_REAL_RUN_ROOT/cwite/proposed_best_config.json \
+  --data-dir $CWITE_REAL_DATA_DIR \
+  --out-dir $CWITE_REAL_RUN_ROOT/cwite_global_no_clusters \
   --cluster-control global \
   --max-epochs 200 \
   --patience 15 \
@@ -343,8 +352,8 @@ python proposed_random_cluster_control.py \
 Outputs:
 
 ```text
-/data4/meerak/cwite_realdata_final/cwite_random_clusters/random_cluster_proposed_y_test_pred.joblib
-/data4/meerak/cwite_realdata_final/cwite_global_no_clusters/global_cluster_proposed_y_test_pred.joblib
+$CWITE_REAL_RUN_ROOT/cwite_random_clusters/random_cluster_proposed_y_test_pred.joblib
+$CWITE_REAL_RUN_ROOT/cwite_global_no_clusters/global_cluster_proposed_y_test_pred.joblib
 ```
 
 ### Alternative clustering methods
@@ -352,9 +361,9 @@ Outputs:
 ```bash
 python proposed_cluster_method_controls.py \
   -gpu 5 \
-  --config /data4/meerak/cwite_realdata_final/cwite/proposed_best_config.json \
-  --data-dir /data4/meerak/real_labor \
-  --out-dir /data4/meerak/cwite_realdata_final/cwite_cluster_methods \
+  --config $CWITE_REAL_RUN_ROOT/cwite/proposed_best_config.json \
+  --data-dir $CWITE_REAL_DATA_DIR \
+  --out-dir $CWITE_REAL_RUN_ROOT/cwite_cluster_methods \
   --cluster-methods kmeans kmeans_pca gmm spectral \
   --cluster-pca-dim 20 \
   --max-epochs 200 \
@@ -365,10 +374,10 @@ python proposed_cluster_method_controls.py \
 Outputs:
 
 ```text
-/data4/meerak/cwite_realdata_final/cwite_cluster_methods/cwite_kmeans_y_test_pred.joblib
-/data4/meerak/cwite_realdata_final/cwite_cluster_methods/cwite_kmeans_pca_y_test_pred.joblib
-/data4/meerak/cwite_realdata_final/cwite_cluster_methods/cwite_gmm_y_test_pred.joblib
-/data4/meerak/cwite_realdata_final/cwite_cluster_methods/cwite_spectral_y_test_pred.joblib
+$CWITE_REAL_RUN_ROOT/cwite_cluster_methods/cwite_kmeans_y_test_pred.joblib
+$CWITE_REAL_RUN_ROOT/cwite_cluster_methods/cwite_kmeans_pca_y_test_pred.joblib
+$CWITE_REAL_RUN_ROOT/cwite_cluster_methods/cwite_gmm_y_test_pred.joblib
+$CWITE_REAL_RUN_ROOT/cwite_cluster_methods/cwite_spectral_y_test_pred.joblib
 ```
 
 After these files exist, rerun `generate_realdata_report_tables.py` to create the
@@ -381,19 +390,19 @@ predictions used for MAE. To save test-set PMFs during a sweep, add
 `--save-test-distribution` to the training commands. This writes files like:
 
 ```text
-/data4/meerak/cwite_realdata_final/cwite/proposed_feature_sweep_best_y_test_dist.joblib
+$CWITE_REAL_RUN_ROOT/cwite/proposed_feature_sweep_best_y_test_dist.joblib
 ```
 
 Then run:
 
 ```bash
 python evaluate_d_calibration.py \
-  --data-dir /data4/meerak/real_labor \
-  --out-dir /data4/meerak/cwite_realdata_final/d_calibration \
-  --model "IPCW=/data4/meerak/cwite_realdata_final/ipcw/ipcw_feature_sweep_best_y_test_dist.joblib" \
-  --model "DeepHit=/data4/meerak/cwite_realdata_final/deephit/deephit_feature_sweep_best_y_test_dist.joblib" \
-  --model "Powell=/data4/meerak/cwite_realdata_final/powell/powell_feature_sweep_best_y_test_dist.joblib" \
-  --model "CWITE=/data4/meerak/cwite_realdata_final/cwite/proposed_feature_sweep_best_y_test_dist.joblib"
+  --data-dir $CWITE_REAL_DATA_DIR \
+  --out-dir $CWITE_REAL_RUN_ROOT/d_calibration \
+  --model "IPCW=$CWITE_REAL_RUN_ROOT/ipcw/ipcw_feature_sweep_best_y_test_dist.joblib" \
+  --model "DeepHit=$CWITE_REAL_RUN_ROOT/deephit/deephit_feature_sweep_best_y_test_dist.joblib" \
+  --model "Powell=$CWITE_REAL_RUN_ROOT/powell/powell_feature_sweep_best_y_test_dist.joblib" \
+  --model "CWITE=$CWITE_REAL_RUN_ROOT/cwite/proposed_feature_sweep_best_y_test_dist.joblib"
 ```
 
 The script computes uncensored D-calibration by testing whether
@@ -408,9 +417,9 @@ This holds the selected CWITE config fixed and retrains once for each requested 
 ```bash
 python proposed_k_sensitivity.py \
   -gpu 5 \
-  --config /data4/meerak/cwite_realdata_final/cwite/proposed_best_config.json \
-  --data-dir /data4/meerak/real_labor \
-  --out-dir /data4/meerak/cwite_realdata_final/cwite_k_sensitivity \
+  --config $CWITE_REAL_RUN_ROOT/cwite/proposed_best_config.json \
+  --data-dir $CWITE_REAL_DATA_DIR \
+  --out-dir $CWITE_REAL_RUN_ROOT/cwite_k_sensitivity \
   --k-values 2 3 5 8 10 15 20 30 40 \
   --max-epochs 200 \
   --patience 15 \
@@ -420,8 +429,8 @@ python proposed_k_sensitivity.py \
 Outputs:
 
 ```text
-/data4/meerak/cwite_realdata_final/cwite_k_sensitivity/cwite_k5_y_test_pred.joblib
-/data4/meerak/cwite_realdata_final/cwite_k_sensitivity/cwite_k_sensitivity_results.csv
+$CWITE_REAL_RUN_ROOT/cwite_k_sensitivity/cwite_k5_y_test_pred.joblib
+$CWITE_REAL_RUN_ROOT/cwite_k_sensitivity/cwite_k_sensitivity_results.csv
 ```
 
 ## Notes for collaborators

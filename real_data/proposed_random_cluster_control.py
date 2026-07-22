@@ -3,6 +3,7 @@ import json
 import os
 import time
 from pathlib import Path
+from cwite_paths import real_data_dir, real_run_path, real_output_path
 from types import SimpleNamespace
 
 import joblib
@@ -59,8 +60,8 @@ def main():
         )
     )
     parser.add_argument("--config", required=True, help="Path to proposed_best_config.json from the KMeans sweep.")
-    parser.add_argument("--data-dir", default="/data4/meerak/real_labor")
-    parser.add_argument("--out-dir", default="/data4/meerak/proposed_random_cluster_control")
+    parser.add_argument("--data-dir", default=real_data_dir())
+    parser.add_argument("--out-dir", default=real_output_path('proposed_random_cluster_control'))
     parser.add_argument("-gpu", type=int, default=0)
     parser.add_argument("--cluster-control", choices=["random", "global"], default="random")
     parser.add_argument("--random-cluster-seed", type=int, default=123)

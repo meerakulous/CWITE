@@ -1,6 +1,7 @@
 import argparse
 import csv
 from pathlib import Path
+from cwite_paths import real_data_dir, real_run_path, real_output_path
 
 import joblib
 import numpy as np
@@ -14,20 +15,20 @@ except ImportError:
 
 
 DEFAULT_MODELS = [
-    ("IPCW", "/data4/meerak/cwite_realdata_final/ipcw/ipcw_feature_sweep_best_y_test_pred.joblib"),
-    ("DeepHit", "/data4/meerak/cwite_realdata_final/deephit/deephit_feature_sweep_best_y_test_pred.joblib"),
-    ("Powell", "/data4/meerak/cwite_realdata_final/powell/powell_feature_sweep_best_y_test_pred.joblib"),
-    ("CWITE", "/data4/meerak/cwite_realdata_final/cwite/proposed_feature_sweep_best_y_test_pred.joblib"),
+    ("IPCW", real_run_path('ipcw/ipcw_feature_sweep_best_y_test_pred.joblib')),
+    ("DeepHit", real_run_path('deephit/deephit_feature_sweep_best_y_test_pred.joblib')),
+    ("Powell", real_run_path('powell/powell_feature_sweep_best_y_test_pred.joblib')),
+    ("CWITE", real_run_path('cwite/proposed_feature_sweep_best_y_test_pred.joblib')),
 ]
 
 DEFAULT_CLUSTER_MODELS = [
-    ("CWITE KMeans selected", "/data4/meerak/cwite_realdata_final/cwite/proposed_feature_sweep_best_y_test_pred.joblib"),
-    ("CWITE Random Clusters", "/data4/meerak/cwite_realdata_final/cwite_random_clusters/random_cluster_proposed_y_test_pred.joblib"),
-    ("CWITE Global No Clusters", "/data4/meerak/cwite_realdata_final/cwite_global_no_clusters/global_cluster_proposed_y_test_pred.joblib"),
-    ("CWITE KMeans rerun", "/data4/meerak/cwite_realdata_final/cwite_cluster_methods/cwite_kmeans_y_test_pred.joblib"),
-    ("CWITE KMeans+PCA", "/data4/meerak/cwite_realdata_final/cwite_cluster_methods/cwite_kmeans_pca_y_test_pred.joblib"),
-    ("CWITE GMM", "/data4/meerak/cwite_realdata_final/cwite_cluster_methods/cwite_gmm_y_test_pred.joblib"),
-    ("CWITE Spectral", "/data4/meerak/cwite_realdata_final/cwite_cluster_methods/cwite_spectral_y_test_pred.joblib"),
+    ("CWITE KMeans selected", real_run_path('cwite/proposed_feature_sweep_best_y_test_pred.joblib')),
+    ("CWITE Random Clusters", real_run_path('cwite_random_clusters/random_cluster_proposed_y_test_pred.joblib')),
+    ("CWITE Global No Clusters", real_run_path('cwite_global_no_clusters/global_cluster_proposed_y_test_pred.joblib')),
+    ("CWITE KMeans rerun", real_run_path('cwite_cluster_methods/cwite_kmeans_y_test_pred.joblib')),
+    ("CWITE KMeans+PCA", real_run_path('cwite_cluster_methods/cwite_kmeans_pca_y_test_pred.joblib')),
+    ("CWITE GMM", real_run_path('cwite_cluster_methods/cwite_gmm_y_test_pred.joblib')),
+    ("CWITE Spectral", real_run_path('cwite_cluster_methods/cwite_spectral_y_test_pred.joblib')),
 ]
 
 
@@ -275,8 +276,8 @@ def evaluate_clinical(y, e, preds, masks, horizons, n_boot, seed):
 
 def main():
     parser = argparse.ArgumentParser(description="Generate final real-data MAE, C-index, clinical, and clustering sensitivity tables.")
-    parser.add_argument("--data-dir", default="/data4/meerak/real_labor")
-    parser.add_argument("--out-dir", default="/data4/meerak/final_realdata_report_tables")
+    parser.add_argument("--data-dir", default=real_data_dir())
+    parser.add_argument("--out-dir", default=real_output_path('final_realdata_report_tables'))
     parser.add_argument("--model", action="append", default=[], help="Main model as Name=/path/to/pred.joblib")
     parser.add_argument("--cluster-model", action="append", default=[], help="Cluster sensitivity model as Name=/path/to/pred.joblib")
     parser.add_argument("--horizons", type=int, nargs="+", default=[1, 2, 3, 7])

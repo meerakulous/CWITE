@@ -1,6 +1,6 @@
 # Hyperparameter Recovery: synthetic
 
-Archive: `/Users/meerakrishnamoorthy/Desktop/synthetic_labor2.targ.z`
+Archive: `<archive-directory>/synthetic_labor2.targ.z`
 
 ## Paper Table Rows
 

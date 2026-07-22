@@ -1,5 +1,5 @@
 {
-  "archive": "/Users/meerakrishnamoorthy/Desktop/semi_synthetic_2.tar.gz",
+  "archive": "<archive-directory>/semi_synthetic_2.tar.gz",
   "kind": "semi_synthetic",
   "n_files_seen": 77,
   "selected_hyperparameters": {
